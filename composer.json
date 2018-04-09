@@ -1,0 +1,15 @@
+{
+    "name": "juliastrelkova/project-lvl1-s252",
+    "authors": [
+        {
+            "name": "Julia Strelkova",
+            "email": "strelkovajuli@gmail.com"
+        }
+    ],
+    "require": {},
+    "bin": [
+        "bin/brain-games"
+    ]
+
+}
+
