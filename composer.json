@@ -1,5 +1,7 @@
 {
     "name": "juliastrelkova/project-lvl1-s252",
+    "type": "library",
+    "description": "My version of Hexlet brain-games project",
     "authors": [
         {
             "name": "Julia Strelkova",
@@ -12,4 +14,3 @@
     ]
 
 }
-
