@@ -1,0 +1,3 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/56c99cff678b4e6ece84/maintainability)](https://codeclimate.com/github/JuliaStrelkova/project-lvl1-s252/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/56c99cff678b4e6ece84/test_coverage)](https://codeclimate.com/github/JuliaStrelkova/project-lvl1-s252/test_coverage)
+[![Build Status](https://travis-ci.org/JuliaStrelkova/project-lvl1-s252.svg?branch=master)](https://travis-ci.org/JuliaStrelkova/project-lvl1-s252)
