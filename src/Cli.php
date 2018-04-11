@@ -2,30 +2,35 @@
 
 namespace  BrainGames\Cli;
 
-use function BrainGames\BrainEven\checkParity;
+use function BrainGames\Games\BrainCalculator\calculatorGame;
+use function BrainGames\Games\BrainEven\checkParity;
+use function BrainGames\Games\BrainGames\greeting;
 use function cli\line;
 use function cli\prompt;
 
-function run($string)
+function showWelcomeMessage()
 {
     line('Welcome to the Brain Game!');
-
-    if ($string === 'brain-games') {
-        $name = askUserName();
-        line('Hello, %s!', $name);
-
-        return;
-    }
-
-    if ($string === 'brain-even') {
-        line('Answer "yes" if number even otherwise answer "no".');
-        checkParity(3);
-
-        return;
-    }
 }
 
 function askUserName()
 {
     return prompt('May I have your name?');
 }
+
+function run($gameName)
+{
+    showWelcomeMessage();
+
+    if ($gameName === 'brain-calc') {
+        return calculatorGame(DEFAULT_ATTEMPTS_VALUE);
+    }
+    if ($gameName === 'brain-even') {
+        return checkParity(DEFAULT_ATTEMPTS_VALUE);
+    }
+    if ($gameName=== 'brain-games') {
+        return greeting();
+    }
+}
+
+const DEFAULT_ATTEMPTS_VALUE = 3;

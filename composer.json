@@ -19,7 +19,12 @@
         "psr-4": {
             "BrainGames\\": "src"
         },
-        "files": ["src/Cli.php","src/BrainEven/checkParity.php"]
+        "files": [
+            "src/Cli.php",
+            "src/Games/BrainEven/checkParity.php",
+            "src/Games/BrainCalculator/calculator.php",
+            "src/Games/BrainGames/greeting.php"
+        ]
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.2"

@@ -1,6 +1,6 @@
 <?php
 
-namespace BrainGames\BrainEven;
+namespace BrainGames\Games\BrainEven;
 
 use function BrainGames\Cli\askUserName;
 use function cli\line;
@@ -8,6 +8,7 @@ use function cli\prompt;
 
 function checkParity($attempts)
 {
+    line('Answer "yes" if number even otherwise answer "no".');
     $name = askUserName();
     for ($i = 1; $i <= $attempts; $i++) {
         $randomNumber = random_int(PHP_INT_MIN, PHP_INT_MAX);
@@ -31,8 +32,6 @@ function checkParity($attempts)
         line('Correct!');
     }
     line("Congratulations, $name!");
-
-    return;
 }
 
 function isAnswerCorrect($randomNumber, $userAnswer)
