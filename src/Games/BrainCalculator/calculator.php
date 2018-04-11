@@ -59,9 +59,9 @@ function calculate($numberOne, $numberTwo, $sign)
 
 function askAnswer($numberOne, $numberTwo, $sign)
 {
-    line("Question: $numberOne $sign $numberTwo ");
+    line("Question: $numberOne $sign $numberTwo");
 
-    return prompt('Your answer');
+    return prompt('Your answer', 0);
 }
 
 function getRandomSign()
