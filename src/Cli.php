@@ -5,26 +5,24 @@ namespace  BrainGames\Cli;
 use function cli\line;
 use function cli\prompt;
 
-function run(array $gamesParams = [], string $description = '')
+const DEFAULT_ATTEMPTS_VALUE = 3;
+
+function run(callable $generateQuestion, callable $generateAnswer, string $description = '')
 {
     showWelcomeMessage($description);
     $name = askUserName();
 
-    if (count($gamesParams) === 0) {
-        return;
-    }
-
-    foreach ($gamesParams as list($question, $rightAnswer)) {
+    for ($i = 1; $i <= DEFAULT_ATTEMPTS_VALUE; ++$i) {
+        $question = $generateQuestion();
         $userAnswer = ask($question);
-        if ($userAnswer != $rightAnswer) {
+        $rightAnswer = (string)$generateAnswer($question);
+        if ($userAnswer !== $rightAnswer) {
             showWrongAnswer($userAnswer, $rightAnswer, $name);
 
             return;
         }
-
         showCorrectAnswer();
     }
-
     showCongratulation($name);
 }
 

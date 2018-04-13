@@ -6,23 +6,22 @@ use function BrainGames\Cli\run;
 
 const MIN_VALUE = 0;
 const MAX_VALUE = 100;
-const DEFAULT_ATTEMPTS_VALUE = 3;
 
 function play()
 {
-    $gamesParams = [];
-    for ($i = 1; $i <= DEFAULT_ATTEMPTS_VALUE; ++$i) {
+    $generateQuestion = function () {
         $randomOne = random_int(MIN_VALUE, MAX_VALUE);
         $randomTwo = random_int(MIN_VALUE, MAX_VALUE);
         $randomSign = getRandomSign();
 
-        $answer = calculate($randomOne, $randomTwo, $randomSign);
-        $question = "$randomOne $randomSign $randomTwo";
+        return "$randomOne $randomSign $randomTwo";
+    };
+    $generateAnswer = function (string $question) {
+        list($firstNumber, $randomSign, $secondNumber) = explode(' ', $question);
 
-        $gamesParams[] = [$question, $answer];
-    }
-
-    run($gamesParams, 'What is the result of the expression?');
+        return calculate((int)$firstNumber, (int)$secondNumber, $randomSign);
+    };
+    run($generateQuestion, $generateAnswer, 'What is the result of the expression.');
 }
 
 function calculate($numberOne, $numberTwo, $sign)
