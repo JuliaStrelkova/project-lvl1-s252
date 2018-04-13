@@ -7,10 +7,13 @@ use function cli\prompt;
 
 const DEFAULT_ATTEMPTS_VALUE = 3;
 
-function run(callable $generateQuestion, callable $generateAnswer, string $description = '')
+function run(callable $generateQuestion = null, callable $generateAnswer = null, string $description = '')
 {
     showWelcomeMessage($description);
     $name = askUserName();
+    if (!$generateQuestion || !$generateAnswer) {
+        return;
+    }
 
     for ($i = 1; $i <= DEFAULT_ATTEMPTS_VALUE; ++$i) {
         $question = $generateQuestion();
