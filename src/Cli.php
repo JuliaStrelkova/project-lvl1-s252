@@ -4,52 +4,68 @@ namespace  BrainGames\Cli;
 
 use function cli\line;
 use function cli\prompt;
-use const BrainGames\GamesConfigurations\DEFAULT_ATTEMPTS_VALUE;
 
-function run($gameName = '', $description = '')
+function run(array $gamesParams = [], string $description = '')
 {
-    showWelcomeMessage();
-    if ($description) {
-        line($description);
-    }
+    showWelcomeMessage($description);
     $name = askUserName();
-    line('Hello, %s!', $name);
 
-    if ($gameName === '') {
+    if (count($gamesParams) === 0) {
         return;
     }
 
-    for ($i = 1; $i <= DEFAULT_ATTEMPTS_VALUE; $i++) {
-        $results = call_user_func("\BrainGames\Games\\$gameName");
-
-        if ($results['user_answer'] != $results['correct_answer']) {
-            line(
-                "'%s' is wrong answer ;(. Correct answer was '%s'. Let's try again, %s!",
-                $results['user_answer'],
-                $results['correct_answer'],
-                $name
-            );
+    foreach ($gamesParams as list($question, $rightAnswer)) {
+        $userAnswer = ask($question);
+        if ($userAnswer != $rightAnswer) {
+            showWrongAnswer($userAnswer, $rightAnswer, $name);
 
             return;
         }
 
-        line('Correct!');
+        showCorrectAnswer();
     }
 
+    showCongratulation($name);
+}
+
+function showCongratulation($name)
+{
     line('Congratulations, %s!', $name);
 }
 
-function showWelcomeMessage()
+function showCorrectAnswer()
+{
+    line('Correct!');
+}
+
+function showWrongAnswer($userAnswer, $rightAnswer, $name)
+{
+    line(
+        "'%s' is wrong answer ;(. Correct answer was '%s'. Let's try again, %s!",
+        $userAnswer,
+        $rightAnswer,
+        $name
+    );
+}
+
+function showWelcomeMessage(string $description = '')
 {
     line('Welcome to the Brain Game!');
+
+    if ($description !== '') {
+        line($description);
+    }
 }
 
 function askUserName()
 {
-    return prompt('May I have your name?', '', ' ');
+    $name = prompt('May I have your name?', '', ' ');
+    line('Hello, %s!', $name);
+
+    return $name;
 }
 
-function ask($question)
+function ask(string $question)
 {
     line("Question: $question");
 

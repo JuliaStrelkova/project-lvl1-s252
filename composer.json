@@ -9,13 +9,15 @@
         }
     ],
     "require": {
+        "php": "^7.0",
         "wp-cli/php-cli-tools": "^0.11.8"
     },
     "bin": [
         "bin/brain-games",
         "bin/brain-even",
         "bin/brain-calc",
-        "bin/brain-gcd"
+        "bin/brain-gcd",
+        "bin/brain-balance"
     ],
     "autoload": {
         "psr-4": {
@@ -23,10 +25,10 @@
         },
         "files": [
             "src/Cli.php",
-            "src/GamesConfigurations.php",
             "src/Games/brain-even.php",
             "src/Games/brain-calc.php",
-            "src/Games/brain-gcd.php"
+            "src/Games/brain-gcd.php",
+            "src/Games/brain-balance.php"
         ]
     },
     "require-dev": {

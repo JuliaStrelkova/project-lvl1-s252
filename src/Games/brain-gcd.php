@@ -1,20 +1,27 @@
 <?php
 
-namespace BrainGames\Games;
+namespace BrainGames\Games\Gcd;
 
-use function BrainGames\Cli\ask;
-use const BrainGames\GamesConfigurations\MAX_VALUE;
-use const BrainGames\GamesConfigurations\MIN_VALUE;
+use function BrainGames\Cli\run;
 
-function brainGcd()
+const  DEFAULT_ATTEMPTS_VALUE = 3;
+const MIN_VALUE = 0;
+const MAX_VALUE = 100;
+
+
+
+function play()
 {
-    $randomOne = random_int(MIN_VALUE, MAX_VALUE);
-    $randomTwo = random_int(MIN_VALUE, MAX_VALUE);
+    for ($i = 1; $i <= DEFAULT_ATTEMPTS_VALUE; $i++) {
+        $randomOne = random_int(MIN_VALUE, MAX_VALUE);
+        $randomTwo = random_int(MIN_VALUE, MAX_VALUE);
 
-    $greatestCommonDivisor = findGreatestCommonDivisor($randomOne, $randomTwo);
-    $answerUser = ask("$randomOne $randomTwo");
+        $answer = findGreatestCommonDivisor($randomOne, $randomTwo);
+        $question = "$randomOne $randomTwo";
 
-    return ['correct_answer' => $greatestCommonDivisor, 'user_answer' => $answerUser];
+        $gamesParams[] = [$question, $answer];
+    }
+    run($gamesParams, 'Find the greatest common divisor of given numbers.');
 }
 
 function findGreatestCommonDivisor($numberOne, $numberTwo)

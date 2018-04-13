@@ -1,20 +1,34 @@
 <?php
 
-namespace BrainGames\Games;
+namespace BrainGames\Games\Even;
 
-use function BrainGames\Cli\ask;
-use const BrainGames\GamesConfigurations\MAX_VALUE;
-use const BrainGames\GamesConfigurations\MIN_VALUE;
+use function BrainGames\Cli\run;
 
-function brainEven()
+const  DEFAULT_ATTEMPTS_VALUE = 3;
+const MIN_VALUE = 0;
+const MAX_VALUE = 100;
+
+function play()
 {
-    $randomNumber = random_int(MIN_VALUE, MAX_VALUE);
+    $gamesParams = [];
+    for ($i = 1; $i <= DEFAULT_ATTEMPTS_VALUE; $i++) {
+        $randomNumber = random_int(MIN_VALUE, MAX_VALUE);
+
+        $answer = isEven($randomNumber);
+        $question = $randomNumber;
+
+        $gamesParams[] = [$question, $answer];
+    }
+
+    run($gamesParams, 'Answer "yes" if number even otherwise answer "no".');
+}
+
+function isEven($randomNumber): string
+{
     $answer = 'no';
     if ($randomNumber % 2 === 0) {
         $answer = 'yes';
     }
 
-    $answerUser = ask("$randomNumber");
-
-    return ['user_answer' => $answerUser, 'correct_answer' => $answer];
+    return $answer;
 }

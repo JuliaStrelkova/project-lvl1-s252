@@ -1,21 +1,28 @@
 <?php
 
-namespace BrainGames\Games;
+namespace BrainGames\Games\Calculator;
 
-use function BrainGames\Cli\ask;
-use const BrainGames\GamesConfigurations\MAX_VALUE;
-use const BrainGames\GamesConfigurations\MIN_VALUE;
+use function BrainGames\Cli\run;
 
-function brainCalc()
+const MIN_VALUE = 0;
+const MAX_VALUE = 100;
+const DEFAULT_ATTEMPTS_VALUE = 3;
+
+function play()
 {
-    $randomOne = random_int(MIN_VALUE, MAX_VALUE);
-    $randomTwo = random_int(MIN_VALUE, MAX_VALUE);
-    $randomSign = getRandomSign();
+    $gamesParams = [];
+    for ($i = 1; $i <= DEFAULT_ATTEMPTS_VALUE; ++$i) {
+        $randomOne = random_int(MIN_VALUE, MAX_VALUE);
+        $randomTwo = random_int(MIN_VALUE, MAX_VALUE);
+        $randomSign = getRandomSign();
 
-    $answerCalc = calculate($randomOne, $randomTwo, $randomSign);
-    $answerUser = ask("$randomOne $randomSign $randomTwo");
+        $answer = calculate($randomOne, $randomTwo, $randomSign);
+        $question = "$randomOne $randomSign $randomTwo";
 
-    return ['correct_answer' => $answerCalc, 'user_answer' => $answerUser];
+        $gamesParams[] = [$question, $answer];
+    }
+
+    run($gamesParams, 'What is the result of the expression?');
 }
 
 function calculate($numberOne, $numberTwo, $sign)
