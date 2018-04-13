@@ -25,13 +25,13 @@ function play()
 
 function findGreatestCommonDivisor(int $numberOne, int $numberTwo)
 {
-    while ($numberOne !== $numberTwo) {
+    while ($numberOne !== 0 && $numberTwo !== 0) {
         if ($numberOne > $numberTwo) {
-            $numberOne -= $numberTwo;
+            $numberOne %= $numberTwo;
         } else {
-            $numberTwo -= $numberOne;
+            $numberTwo %= $numberOne;
         }
     }
 
-    return $numberOne;
+    return $numberOne + $numberTwo;
 }
