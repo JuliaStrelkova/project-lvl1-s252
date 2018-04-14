@@ -33,12 +33,12 @@ function generateQuestion($progression)
     return implode(' ', $progression);
 }
 
-function generateProgression($randomNumber, $randomStep)
+function generateProgression($startNumber, $step)
 {
-    $numberProgression = $randomNumber;
+    $numberProgression = $startNumber;
     $progression = [$numberProgression];
-    for ($i = 0; $i < PROGRESSION_LENGTH; $i++) {
-        $numberProgression += $randomStep;
+    for ($i = 1; $i < PROGRESSION_LENGTH; $i++) {
+        $numberProgression += $step;
         $progression[] = $numberProgression;
     }
 
