@@ -9,14 +9,14 @@ const MAX_VALUE = 100;
 
 function play()
 {
-    $generateQuestion = function () {
-        return random_int(MIN_VALUE, MAX_VALUE);
-    };
-    $generateAnswer = function (string $question) {
-        return isEven((int)$question);
+    $generateGames = function () {
+        $question = random_int(MIN_VALUE, MAX_VALUE);
+        $generateAnswer = isEven($question);
+
+        return [$question, $generateAnswer];
     };
 
-    run($generateQuestion, $generateAnswer, 'Answer "yes" if number even otherwise answer "no".');
+    run($generateGames, 'Answer "yes" if number even otherwise answer "no".');
 }
 
 function isEven($randomNumber): string

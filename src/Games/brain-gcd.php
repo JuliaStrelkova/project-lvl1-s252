@@ -9,18 +9,16 @@ const MAX_VALUE = 100;
 
 function play()
 {
-    $generateQuestion = function () {
+    $generateGame = function () {
         $randomOne = random_int(MIN_VALUE, MAX_VALUE);
         $randomTwo = random_int(MIN_VALUE, MAX_VALUE);
 
-        return "$randomOne $randomTwo";
-    };
-    $generateAnswer = function (string $question) {
-        list($firstNumber, $secondNumber) = explode(' ', $question);
+        $question = "$randomOne $randomTwo";
+        $rightAnswer = findGreatestCommonDivisor($randomOne, $randomTwo);
 
-        return findGreatestCommonDivisor((int)$firstNumber, (int)$secondNumber);
+        return [$question, $rightAnswer];
     };
-    run($generateQuestion, $generateAnswer, 'Find the greatest common divisor of given numbers.');
+    run($generateGame, 'Find the greatest common divisor of given numbers.');
 }
 
 function findGreatestCommonDivisor(int $numberOne, int $numberTwo)

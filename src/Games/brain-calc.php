@@ -9,19 +9,20 @@ const MAX_VALUE = 100;
 
 function play()
 {
-    $generateQuestion = function () {
+    $generateGame = function () {
         $randomOne = random_int(MIN_VALUE, MAX_VALUE);
         $randomTwo = random_int(MIN_VALUE, MAX_VALUE);
         $randomSign = getRandomSign();
 
-        return "$randomOne $randomSign $randomTwo";
-    };
-    $generateAnswer = function (string $question) {
+        $question = "$randomOne $randomSign $randomTwo";
+
         list($firstNumber, $randomSign, $secondNumber) = explode(' ', $question);
 
-        return calculate((int)$firstNumber, (int)$secondNumber, $randomSign);
+        $rightAnswer = calculate((int)$firstNumber, (int)$secondNumber, $randomSign);
+
+        return [$question, $rightAnswer];
     };
-    run($generateQuestion, $generateAnswer, 'What is the result of the expression.');
+    run($generateGame, 'What is the result of the expression.');
 }
 
 function calculate($numberOne, $numberTwo, $sign)

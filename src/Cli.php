@@ -7,19 +7,18 @@ use function cli\prompt;
 
 const DEFAULT_ATTEMPTS_VALUE = 3;
 
-function run(callable $generateQuestion = null, callable $generateAnswer = null, string $description = '')
+function run(callable $generateGame = null, string $description = '')
 {
     showWelcomeMessage($description);
     $name = askUserName();
-    if (!$generateQuestion || !$generateAnswer) {
+    if (!$generateGame) {
         return;
     }
 
     for ($i = 1; $i <= DEFAULT_ATTEMPTS_VALUE; ++$i) {
-        $question = $generateQuestion();
+        list($question, $rightAnswer) = $generateGame();
         $userAnswer = ask($question);
-        $rightAnswer = (string)$generateAnswer($question);
-        if ($userAnswer !== $rightAnswer) {
+        if ($userAnswer !== (string)$rightAnswer) {
             showWrongAnswer($userAnswer, $rightAnswer, $name);
 
             return;

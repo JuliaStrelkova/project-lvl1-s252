@@ -9,14 +9,14 @@ const MAX_VALUE = 100;
 
 function play()
 {
-    $generateQuestion = function () {
-        return random_int(MIN_VALUE, MAX_VALUE);
-    };
-    $generateAnswer = function (string $question) {
-        return balance((int)$question);
+    $generateGame = function () {
+        $question = random_int(MIN_VALUE, MAX_VALUE);
+        $rightAnswer = balance($question);
+
+        return [$question, $rightAnswer];
     };
 
-    run($generateQuestion, $generateAnswer, 'Balance the given number.');
+    run($generateGame, 'Balance the given number.');
 }
 
 function balance(int $number)
